@@ -1,0 +1,160 @@
+Projet en React avec Vite.js
+
+Je souhaite créer une application web serait utilisable uniquement grâce à un compte.
+Cette application possèderait 12 pages Web dans chaque page web je souhaite avoir des menus déroulant d'un côté qui fait que lorsque je clique sur un de ses menus je puisse avoir le contenu de mage qui change car dans chaque menu a une vidéo et plusieurs contenu fichiers ou textes :
+	-Accueil
+- Signature
+    - FR
+	- Thrive to Perform 'REUSSIR' NIVEAU 1.1 FRANCAIS 2 heures
+	- Thrive To Perform 'REUSSIR' NIVEAU 1.2 FRANCAIS 5.5 heures
+	- Thrive to Perform & Perform to Thrive NIVEAU 1.1 FRANCAIS
+	- Thrive To Perform 'REUSSIR' NIVEAU 2.0 FRANCAIS 4 
+    - EN
+	- Thrive To Perform & Perform Yo Thrive LEVEL1.1 ENGLISH
+	- Thrive To Perform LEVEL 1.2 ENGLISH
+	- Thrive To Perform '‘Succeed' LEVEL 2.0 English 4 hours
+- Positive Performances Resources & Surveys
+	- Here you will find Masterclasses by Krumma and the team
+	- Self Inquiry Tools and Surveys
+-Positive Performances Events and Media Featuring
+	- Forbes Coaches Council
+	- Featured on Forbes
+	- Blog Article
+-Education by Positive Performances
+	- ere you will find Masterclasses by Krumma and the team
+
+Type users : users_standard users_prenium admin
+Ma Vision en tant que utilisateurs standard : tout sauf Self Inquiry Tools and Surveys
+Ma Vision en tant que utilisateurs prenium :tout 
+Ma Vision en tant que admin : tout + listes users + dashboard + pouvoir modifié pages modifier vidéos etc...
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+
+Version IA : 
+
+Parfait ! Je vais te proposer un **diagramme d’architecture pour ton application React avec Vite.js**, incluant les pages, composants, menus déroulants et gestion des rôles utilisateurs. Voici une version textuelle structurée, que tu pourras facilement transformer en diagramme visuel ensuite :
+
+---
+
+## 🌐 Architecture Application React – Positive Performances
+
+### 1. **Routing Principal (`App.jsx`)**
+
+```text
+App
+ ├─ AuthProvider (Context pour utilisateur connecté + rôle)
+ ├─ Router (react-router-dom)
+ │   ├─ /login → LoginForm
+ │   ├─ /register → RegisterForm
+ │   ├─ /home → HomePage
+ │   ├─ /signature → SignaturePage
+ │   ├─ /resources → ResourcesPage
+ │   ├─ /events → EventsPage
+ │   ├─ /education → EducationPage
+ │   └─ /admin → AdminDashboard (Admin uniquement)
+ └─ ProtectedRoute (vérifie rôle utilisateur)
+```
+
+---
+
+### 2. **Pages Principales (`src/pages`)**
+
+* **HomePage.jsx**
+
+  * Composants : `SidebarMenu`, `ContentDisplay`
+* **SignaturePage.jsx**
+
+  * Menu déroulant : FR / EN
+  * Sous-menus pour chaque formation
+* **ResourcesPage.jsx**
+
+  * Menu : Masterclasses / Self Inquiry Tools and Surveys
+  * Permissions : `user_standard` bloque Self Inquiry Tools and Surveys
+* **EventsPage.jsx**
+
+  * Menu : Forbes Coaches Council / Featured on Forbes / Blog Article
+* **EducationPage.jsx**
+
+  * Menu : Masterclasses by Krumma and team
+* **AdminDashboard.jsx**
+
+  * Liste des utilisateurs
+  * Gestion des pages et contenus
+  * Statistiques / Dashboard
+
+---
+
+### 3. **Composants Réutilisables (`src/components`)**
+
+* **SidebarMenu.jsx**
+
+  * Props : `menuItems`, `onItemClick`
+  * Affiche menus déroulants et sous-menus
+* **ContentDisplay.jsx**
+
+  * Props : `content` (texte, fichiers, vidéo)
+  * Change dynamiquement selon menu sélectionné
+* **VideoPlayer.jsx**
+
+  * Lecture vidéo intégrée (mp4, YouTube, Vimeo…)
+* **LoginForm.jsx / RegisterForm.jsx**
+
+  * Formulaire d’authentification
+* **ProtectedRoute.jsx**
+
+  * Vérifie rôle utilisateur avant d’accéder à la page
+
+---
+
+### 4. **Context / State Management**
+
+* **AuthContext**
+
+  * `user` : { id, email, role }
+  * `login()`, `logout()`, `register()`
+* **ContentContext** (optionnel si contenu dynamique)
+
+  * Contenus par page + menu
+  * Permet à l’admin de modifier les contenus
+
+---
+
+### 5. **Gestion des Rôles et Permissions**
+
+| Page / Contenu                           | user_standard | user_premium | admin |
+| ---------------------------------------- | ------------- | ------------ | ----- |
+| Accueil / Signature / Events / Education | ✅             | ✅            | ✅     |
+| Self Inquiry Tools and Surveys           | ❌             | ✅            | ✅     |
+| AdminDashboard / Gestion utilisateurs    | ❌             | ❌            | ✅     |
+| Modifier vidéos / textes / fichiers      | ❌             | ❌            | ✅     |
+
+---
+
+### 6. **Flux de Navigation**
+
+```text
+Utilisateur non connecté
+ └─ /login → AuthContext → Redirection selon rôle
+
+Utilisateur connecté
+ ├─ SidebarMenu
+ │   ├─ Cliquer sur menu → ContentDisplay met à jour contenu
+ │   └─ Permissions appliquées (affichage conditionnel)
+ └─ Admin
+     ├─ Peut modifier contenus
+     └─ Accès AdminDashboard
+```
+
+---
+
+Si tu veux, je peux maintenant te **faire un vrai schéma visuel type diagramme UML/React avec flèches**, que tu pourras directement utiliser comme blueprint pour ton projet.
+
+Veux‑tu que je fasse ce schéma visuel ?
