@@ -1,4 +1,3 @@
-// src/components/FlipCard.jsx
 import { useMemo, useState } from "react";
 
 export default function FlipCard({
@@ -8,15 +7,18 @@ export default function FlipCard({
   imageSrc,
   iconSrc,
   onOpen,
+  onOpenUser,
   accent = "#e7c7a7",
 }) {
   const [flipped, setFlipped] = useState(false);
 
-  const styleVars = useMemo(() => ({
-    "--pp-accent": accent,
-  }), [accent]);
+  const styleVars = useMemo(() => {
+    return {
+      "--pp-accent": accent,
+    };
+  }, [accent]);
 
-  const toggle = () => setFlipped(v => !v);
+  const toggle = () => setFlipped((v) => !v);
 
   return (
     <article
@@ -33,7 +35,6 @@ export default function FlipCard({
       aria-label={`${title} - ouvrir les détails`}
     >
       <div className="pp-card__inner">
-        {/* FRONT */}
         <div className="pp-card__face pp-card__front">
           <div className="pp-card__media">
             <img className="pp-card__img" src={imageSrc} alt={title} />
@@ -49,7 +50,6 @@ export default function FlipCard({
           </div>
         </div>
 
-        {/* BACK */}
         <div className="pp-card__face pp-card__back">
           <h3 className="pp-card__title">{title}</h3>
           <p className="pp-card__desc">{description}</p>
@@ -59,11 +59,11 @@ export default function FlipCard({
               className="pp-btn"
               type="button"
               onClick={(e) => {
-                e.stopPropagation(); // évite de re-retourner
-                onOpen?.();
+                e.stopPropagation();
+                (onOpen ?? onOpenUser)?.();
               }}
             >
-              Open
+              Ouvrir
             </button>
 
             <button

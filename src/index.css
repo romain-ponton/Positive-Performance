@@ -52,6 +52,11 @@
   font-weight: 520;
 }
 
+.pp-brand__subtitle{
+  margin: 0;
+  color: rgba(242,231,221,0.75);
+}
+
 .pp-grid{
   width:min(1100px, 92vw);
   margin: 18px auto 48px;
